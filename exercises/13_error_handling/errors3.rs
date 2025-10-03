@@ -20,12 +20,18 @@ fn main() {
     let pretend_user_input = "8";
 
     // Don't change this line.
-    let cost = total_cost(pretend_user_input)?;
+    let cost = total_cost(pretend_user_input);
 
-    if cost > tokens {
-        println!("You can't afford that many!");
-    } else {
-        tokens -= cost;
-        println!("You now have {tokens} tokens.");
+    match cost {
+        Err(err) => println!("{}", err),
+        Ok(c) => {
+            if c > tokens {
+                println!("You can't afford that many!");
+            } else {
+                tokens -= c;
+                println!("You now have {tokens} tokens.");
+            }
+        }
     }
+
 }
